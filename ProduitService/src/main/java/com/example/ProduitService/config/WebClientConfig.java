@@ -1,2 +1,3 @@
-package com.example.ProduitService.config;public class WebClientConfig {
+package com.example.ProduitService.config;
+public class WebClientConfig {
 }
