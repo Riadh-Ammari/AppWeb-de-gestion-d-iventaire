@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
@@ -15,11 +14,11 @@ import java.util.Date;
 public class ProduitRequest {
 
 
-
+    public String idProduit;
     private String nom;
     private Double prixUnitaire;
     private Integer seuilCritique;
     private Date dateAjout;
-    private String IdStock;
+    private String idStock;
 
 }

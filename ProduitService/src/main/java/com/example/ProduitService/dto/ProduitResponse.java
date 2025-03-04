@@ -17,7 +17,7 @@ public class ProduitResponse {
     private Double prixUnitaire;
     private Integer seuilCritique;
     private Date dateAjout;
-    private String IdStock;
+    private String idStock;
 
 
 }

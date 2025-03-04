@@ -1,6 +1,6 @@
-package com.example.ServiceClients.repository;
+package com.example.ServiceClient.repository;
 
-import com.example.ServiceClients.model.Client;
+import com.example.ServiceClient.model.Client;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 

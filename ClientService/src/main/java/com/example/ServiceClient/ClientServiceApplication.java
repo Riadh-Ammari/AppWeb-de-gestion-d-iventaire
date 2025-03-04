@@ -1,13 +1,13 @@
-package com.example.ServiceClients;
+package com.example.ServiceClient;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ServiceClientsApplication {
+public class ClientServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServiceClientsApplication.class, args);
+		SpringApplication.run(ClientServiceApplication.class, args);
 	}
 
 }

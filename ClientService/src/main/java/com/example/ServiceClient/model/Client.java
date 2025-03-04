@@ -1,17 +1,19 @@
-package com.example.ServiceClients.dto;
+package com.example.ServiceClient.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import java.util.Map;
+
+@Document(collection = "clients")
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class ClientResponse {
+@AllArgsConstructor
+@Builder
+public class Client {
+    @Id
     private String idClient;
     private String nom;
     private String contact;

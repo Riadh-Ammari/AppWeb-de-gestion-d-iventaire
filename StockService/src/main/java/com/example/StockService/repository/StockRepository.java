@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface StockRepository extends MongoRepository<Stock,String > {
     @Query("{'nom': ?0}")
     Optional<Stock> findByNom(String nom);
-    @Query("{'IdStock': ?0}")
-    Optional<Stock> findById(String IdStock);
+    @Query("{'idStock': ?0}")
+    Optional<Stock> findById(String idStock);
 
 }
