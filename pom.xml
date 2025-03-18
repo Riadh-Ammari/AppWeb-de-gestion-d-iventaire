@@ -17,6 +17,11 @@
     <modules>
         <module>ProduitService</module>
         <module>StockService</module>
+        <module>ClientService</module>
+
+        <module>CommandeService</module>
+
+
     </modules>
 
     <properties>
