@@ -19,6 +19,8 @@
         <module>StockService</module>
         <module>ClientService</module>
         <module>FournisseurService</module>
+        <module>CommandeService</module>
+
 
 
     </modules>
