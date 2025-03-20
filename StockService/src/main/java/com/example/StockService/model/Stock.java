@@ -2,8 +2,10 @@ package com.example.StockService.model;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
+import java.util.Map;
 
 @Document(collection = "Stocks")
 @Data
@@ -15,13 +17,14 @@ import java.util.List;
 
 public class Stock {
     @Id
-    public String IdStock;
+    @Field("_id")
+    public String idStock;
     private Integer capacite;
-    private Integer quantiteStocke;
+    private Integer quantiteTotalStocke;
     private String adresse;
     private String nom;
     private String etat;
-    private List<String> produits ;
+    private Map<String,Integer> produits;
     private List<String> historiqueCommandes;
     private List<String> fournisseurs ;
     private List<String> clients  ;

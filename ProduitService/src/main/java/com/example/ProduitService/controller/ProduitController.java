@@ -1,3 +1,4 @@
+
 package com.example.ProduitService.controller;
 
 import com.example.ProduitService.dto.ProduitRequest;
@@ -41,6 +42,19 @@ public class ProduitController {
         ProduitResponse produitResponse = produitService.getProduitById(idProduit);
         return ResponseEntity.ok(produitResponse);
     }
+    @PutMapping("/{id}/add-quantity/{quantity}")
+    public ResponseEntity<ProduitResponse> addQuantiteToProduit(
+            @PathVariable Long id, @PathVariable int quantity) {
+        return ResponseEntity.ok(produitService.addQuantiteToProduit(id, quantity));
+    }
+
+    @PutMapping("/{id}/decrease-quantity/{quantity}")
+    public ResponseEntity<ProduitResponse> decreaseQuantiteToProduit(
+            @PathVariable Long id, @PathVariable int quantity) {
+        return ResponseEntity.ok(produitService.decreaseQuantiteToProduit(id, quantity));
+    }
+
+
 
     @GetMapping("/{nom}")
     public ResponseEntity<ProduitResponse> getProduitByName(@PathVariable String nom) {

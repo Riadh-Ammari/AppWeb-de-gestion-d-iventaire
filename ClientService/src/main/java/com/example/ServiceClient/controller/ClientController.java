@@ -1,8 +1,8 @@
-package com.example.ServiceClients.controller;
+package com.example.ServiceClient.controller;
 
-import com.example.ServiceClients.dto.ClientRequest;
-import com.example.ServiceClients.dto.ClientResponse;
-import com.example.ServiceClients.service.ClientService;
+import com.example.ServiceClient.dto.ClientRequest;
+import com.example.ServiceClient.dto.ClientResponse;
+import com.example.ServiceClient.service.ClientService;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,23 +1,22 @@
-package com.example.ServiceClients.model;
-
+package com.example.ServiceClient.dto;
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import java.util.Map;
 
-@Document(collection = "clients")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class Client {
-    @Id
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class ClientRequest {
     private String idClient;
     private String nom;
     private String contact;
     private String adresse;
     private List<String> commandes;
     private Map<String, Integer> produitsAdditionnelsAchetes;
+
+    // Constructeurs, getters et setters
 }

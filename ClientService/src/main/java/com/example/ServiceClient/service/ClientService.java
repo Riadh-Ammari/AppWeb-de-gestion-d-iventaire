@@ -1,11 +1,11 @@
-package com.example.ServiceClients.service;
+package com.example.ServiceClient.service;
 
-import com.example.ServiceClients.dto.ClientRequest;
-import com.example.ServiceClients.dto.ClientResponse;
-import com.example.ServiceClients.model.Client;
-import com.example.ServiceClients.repository.ClientRepository;
-
-import com.example.ServiceClients.service.exception.ClientNotFoundException;
+import com.example.ServiceClient.dto.ClientRequest;
+import com.example.ServiceClient.dto.ClientResponse;
+import com.example.ServiceClient.model.Client;
+import com.example.ServiceClient.repository.ClientRepository;
+import com.example.ServiceClient.service.exception.ClientNotFoundException;
+import com.example.ServiceClient.service.exception.ClientAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,8 +21,17 @@ public class ClientService {
     private final ClientRepository clientRepository;
 
     public ClientResponse createClient(ClientRequest clientRequest) {
-        Client client = Client.builder()
+        // Check if the idClient already exists
+        if (clientRequest.getIdClient() != null) {
+            Optional<Client> existingClient = clientRepository.findById(clientRequest.getIdClient());
+            if (existingClient.isPresent()) {
+                throw new ClientAlreadyExistsException("Client with id " + clientRequest.getIdClient() + " already exists.");
+            }
+        }
 
+        // Create a new client with the provided idClient
+        Client client = Client.builder()
+                .idClient(clientRequest.getIdClient())  // Using the provided idClient
                 .nom(clientRequest.getNom())
                 .contact(clientRequest.getContact())
                 .adresse(clientRequest.getAdresse())
@@ -61,10 +70,8 @@ public class ClientService {
     }
 
     public ClientResponse getClientById(String idClient) {
-        // Recherche du client par ID dans la base de données
         Optional<Client> client = clientRepository.findById(idClient);
 
-        // Si le client est trouvé, on retourne la réponse construite
         if (client.isPresent()) {
             Client c = client.get();
             return ClientResponse.builder()
@@ -76,11 +83,9 @@ public class ClientService {
                     .produitsAdditionnelsAchetes(c.getProduitsAdditionnelsAchetes())
                     .build();
         } else {
-            // Si le client n'est pas trouvé, on lance une exception personnalisée
             throw new ClientNotFoundException("Client not found with id: " + idClient);
         }
     }
-
 
     public void deleteClient(String id) {
         clientRepository.deleteById(id);

@@ -4,7 +4,6 @@ import com.example.StockService.dto.StockRequest;
 import com.example.StockService.dto.StockResponse;
 import com.example.StockService.service.StockService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +19,38 @@ public class StockController {
     @PostMapping
     public ResponseEntity<StockResponse> createStock(@RequestBody StockRequest stockRequest) {
         StockResponse stockResponse = stockService.createStock(stockRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(stockResponse);
+        return ResponseEntity.status(201).body(stockResponse);
+    }
+
+    @PutMapping("/{stockId}/add-quantity/{productId}/{quantity}")
+    public ResponseEntity<Void> addQuantiteToProduit(
+            @PathVariable String stockId,
+            @PathVariable String productId,
+            @PathVariable int quantity) {
+        stockService.addQuantiteToProduit(stockId, productId, quantity);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{stockId}/decrease-quantity/{productId}/{quantity}")
+    public ResponseEntity<Void> decreaseQuantiteToProduit(
+            @PathVariable String stockId,
+            @PathVariable String productId,
+            @PathVariable int quantity) {
+        stockService.decreaseQuantiteToProduit(stockId, productId, quantity);
+        return ResponseEntity.ok().build();
+    }
+
+
+    @DeleteMapping("/{stockId}/remove-product/{productId}")
+    public ResponseEntity<Void> removeProductFromStock(@PathVariable String stockId, @PathVariable String productId) {
+        stockService.removeProductFromStock(stockId, productId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{stockId}/add-product/{productId}")
+    public ResponseEntity<Void> addProductToStock(@PathVariable String stockId, @PathVariable String productId) {
+        stockService.addProductToStock(stockId, productId);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
@@ -34,16 +64,14 @@ public class StockController {
         return ResponseEntity.ok(stockService.getAllStocks());
     }
 
-    @GetMapping("/id/{id}") // Fixed PathVariable Name
-    public ResponseEntity<StockResponse> getStockById(@PathVariable("id") String idStock) {
-        StockResponse stockResponse = stockService.getStockById(idStock);
-        return ResponseEntity.ok(stockResponse);
+    @GetMapping("/id/{id}")
+    public ResponseEntity<StockResponse> getStockById(@PathVariable String id) {
+        return ResponseEntity.ok(stockService.getStockById(id));
     }
 
     @GetMapping("/nom/{nom}")
     public ResponseEntity<StockResponse> getStockByName(@PathVariable String nom) {
-        StockResponse stockResponse = stockService.getStockByName(nom);
-        return ResponseEntity.ok(stockResponse);
+        return ResponseEntity.ok(stockService.getStockByName(nom));
     }
 
     @DeleteMapping("/{id}")

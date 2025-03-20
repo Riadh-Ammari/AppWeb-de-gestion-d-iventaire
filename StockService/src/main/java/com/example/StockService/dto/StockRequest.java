@@ -3,6 +3,8 @@ package com.example.StockService.dto;
 import lombok.*;
 
 import java.util.List;
+import java.util.Map;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -11,12 +13,13 @@ import java.util.List;
 @Setter
 
 public class StockRequest {
+    public String idStock;
     private Integer capacite;
-    private Integer quantiteStocke;
+    private Integer quantiteTotalStocke;
     private String adresse;
     private String nom;
     private String etat;
-    private List<String> produits ;
+    private Map<String,Integer> produits ;
     private List<String> historiqueCommandes;
     private List<String> fournisseurs ;
     private List<String> clients  ;
