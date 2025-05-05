@@ -3,10 +3,21 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/ClientService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CommandeService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonEntities/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonEntity/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonEntity/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonModels/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonModules/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FactureServie/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/FournisseurService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ProduitService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/StockService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/apiGateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/auth-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-dto/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/discovery-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/discovery-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>

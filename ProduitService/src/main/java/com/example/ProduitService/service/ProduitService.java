@@ -1,4 +1,3 @@
-
 package com.example.ProduitService.service;
 
 import com.example.ProduitService.dto.ProduitRequest;
@@ -26,8 +25,9 @@ public class ProduitService {
 
     public ProduitResponse createProduit(ProduitRequest produitRequest) {
         Produit produit = Produit.builder()
-                .idProduit(produitRequest.getIdProduit())
+
                 .idStock(produitRequest.getIdStock())
+                .photoUrl(produitRequest.getPhotoUrl())
                 .nom(produitRequest.getNom())
                 .dateAjout(produitRequest.getDateAjout())
                 .prixUnitaire(produitRequest.getPrixUnitaire())
@@ -41,7 +41,7 @@ public class ProduitService {
         try {
             webClientBuilder.build()
                     .post()
-                    .uri("http://localhost:8081/api/stock/{stockId}/add-product/{productId}",
+                    .uri("http://STOCKSERVICE/api/stock/{stockId}/add-product/{productId}",
                             produit.getIdStock(), produit.getIdProduit())  // Pass both stockId and productId here
                     .retrieve()
                     .bodyToMono(Void.class)  // No response expected
@@ -56,7 +56,7 @@ public class ProduitService {
 
 
 
-    public ProduitResponse decreaseQuantiteToProduit(Long id, int quantiteToRemove) {
+    public ProduitResponse decreaseQuantiteToProduit(String id, int quantiteToRemove) {
         // Find the product
         Produit produit = produitRepository.findById(String.valueOf(id))
                 .orElseThrow(() -> new RuntimeException(String.format("Cannot find produit with id %s", id)));
@@ -71,7 +71,7 @@ public class ProduitService {
         try {
             webClientBuilder.build()
                     .put()
-                    .uri("http://localhost:8081/api/stock/{stockId}/decrease-quantity/{productId}/{quantity}",
+                    .uri("http://STOCKSERVICE/api/stock/{stockId}/decrease-quantity/{productId}/{quantity}",
                             stockId, id, quantiteToRemove)
                     .retrieve()
                     .bodyToMono(Void.class)
@@ -86,7 +86,7 @@ public class ProduitService {
     }
 
 
-    public ProduitResponse addQuantiteToProduit(Long id, int quantiteToAdd) {
+    public ProduitResponse addQuantiteToProduit(String id, int quantiteToAdd) {
         // Find the product in the product database
         Produit produit = produitRepository.findById(String.valueOf(id))
                 .orElseThrow(() -> new RuntimeException(String.format("Cannot find produit with id %s", id)));
@@ -101,7 +101,7 @@ public class ProduitService {
         try {
             webClientBuilder.build()
                     .put()
-                    .uri("http://localhost:8081/api/stock/{stockId}/add-quantity/{productId}/{quantity}",
+                    .uri("http://STOCKSERVICE/api/stock/{stockId}/add-quantity/{productId}/{quantity}",
                             stockId, id, quantiteToAdd)
                     .retrieve()
                     .bodyToMono(Void.class)
@@ -120,12 +120,13 @@ public class ProduitService {
 
 
 
-    public ProduitResponse updateProduit(Long id, ProduitRequest produitRequest) {
-        Produit existingProduit = produitRepository.findById(String.valueOf(id))
+    public ProduitResponse updateProduit(String id, ProduitRequest produitRequest) {
+        Produit existingProduit = produitRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException(String.format("Cannot find produit with id %s", id)));
 
         // Update only the other product details, not the quantity
         existingProduit.setNom(produitRequest.getNom());
+        existingProduit.setPhotoUrl(produitRequest.getPhotoUrl());
         existingProduit.setDateAjout(produitRequest.getDateAjout());
         existingProduit.setPrixUnitaire(produitRequest.getPrixUnitaire());
         existingProduit.setSeuilCritique(produitRequest.getSeuilCritique());
@@ -156,6 +157,7 @@ public class ProduitService {
             Produit p = produit.get();
             return ProduitResponse.builder()
                     .idProduit(p.getIdProduit())
+                    .photoUrl(p.getPhotoUrl())
                     .nom(p.getNom())
                     .prixUnitaire(p.getPrixUnitaire())
                     .seuilCritique(p.getSeuilCritique())
@@ -165,6 +167,12 @@ public class ProduitService {
         } else {
             throw new ProductNotFoundException("Produit not found with id: " + idProduit);
         }
+    }
+    public String getIdStockByIdProduit(String idProduit) {
+        Produit produit = produitRepository.findById(idProduit)
+                .orElseThrow(() -> new RuntimeException("Produit not found with id: " + idProduit));
+
+        return produit.getIdStock();
     }
 
     public void deleteProduit(String id) {
@@ -178,7 +186,7 @@ public class ProduitService {
         try {
             webClientBuilder.build()
                     .delete()
-                    .uri("http://localhost:8081/api/stock/{stockId}/remove-product/{productId}", stockId, id)
+                    .uri("http://STOCKSERVICE/api/stock/{stockId}/remove-product/{productId}", stockId, id)
                     .retrieve()
                     .bodyToMono(Void.class)
                     .block();
@@ -198,6 +206,7 @@ public class ProduitService {
     private ProduitResponse mapToProduitResponse(Produit produit) {
         return ProduitResponse.builder()
                 .idProduit(produit.getIdProduit())
+                .photoUrl(produit.getPhotoUrl())
                 .nom(produit.getNom())
                 .dateAjout(produit.getDateAjout())
                 .prixUnitaire(produit.getPrixUnitaire())

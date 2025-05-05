@@ -18,6 +18,7 @@ public class ProduitResponse {
     private Integer seuilCritique;
     private Date dateAjout;
     private String idStock;
+    private String photoUrl;
 
 
 }

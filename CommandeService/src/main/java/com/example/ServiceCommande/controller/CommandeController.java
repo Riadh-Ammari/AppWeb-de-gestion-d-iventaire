@@ -1,7 +1,9 @@
 package com.example.ServiceCommande.controller;
 
+import com.example.ServiceCommande.dto.ClientInfo;
 import com.example.ServiceCommande.dto.CommandeRequest;
 import com.example.ServiceCommande.dto.CommandeResponse;
+import com.example.ServiceCommande.dto.MonthlyOrdersResponse;
 import com.example.ServiceCommande.service.CommandeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -61,5 +63,35 @@ public class CommandeController {
     public ResponseEntity<Void> deleteCommande(@PathVariable String id) {
         commandeService.deleteCommande(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{commandeId}/client")
+    @ResponseStatus(HttpStatus.OK)
+    public ClientInfo getClientByIdCommande(@PathVariable String commandeId) {
+        return commandeService.getClientByIdCommande(commandeId);
+    }
+
+    @GetMapping("/total-revenue")
+    @ResponseStatus(HttpStatus.OK)
+    public Double getTotalRevenue() {
+        return commandeService.getTotalRevenue();
+    }
+
+    @GetMapping("/orders-by-month")
+    @ResponseStatus(HttpStatus.OK)
+    public List<MonthlyOrdersResponse> getOrdersByMonth() {
+        return commandeService.getOrdersByMonth();
+    }
+
+    @GetMapping("/delivered-orders-by-month")
+    @ResponseStatus(HttpStatus.OK)
+    public List<MonthlyOrdersResponse> getDeliveredOrdersByMonth() {
+        return commandeService.getDeliveredOrdersByMonth();
+    }
+
+    @GetMapping("/pending-delivery")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CommandeResponse> getPendingDeliveryOrders() {
+        return commandeService.getPendingDeliveryOrders();
     }
 }

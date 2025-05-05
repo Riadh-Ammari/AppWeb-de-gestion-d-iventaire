@@ -14,7 +14,7 @@ import java.util.Date;
 public class ProduitRequest {
 
 
-    public String idProduit;
+    private String photoUrl;
     private String nom;
     private Double prixUnitaire;
     private Integer seuilCritique;

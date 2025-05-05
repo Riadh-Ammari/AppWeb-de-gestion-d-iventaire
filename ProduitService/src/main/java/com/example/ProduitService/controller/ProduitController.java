@@ -13,20 +13,29 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/produit")
+
 @RequiredArgsConstructor
 public class ProduitController {
 
     private final ProduitService produitService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ProduitResponse> createProduit(@RequestBody ProduitRequest produitRequest) {
-        ProduitResponse produitResponse = produitService.createProduit(produitRequest);
-        return new ResponseEntity<>(produitResponse, HttpStatus.CREATED);
+
+    public ResponseEntity<ProduitResponse> createProduit(@RequestBody ProduitRequest produitRequest){
+            ProduitResponse produitResponse = produitService.createProduit(produitRequest);
+            return ResponseEntity.status(201).body(produitResponse);
+
+
+    }
+
+    @GetMapping("/{idProduit}/stock-id")
+    public ResponseEntity<String> getStockIdByProduit(@PathVariable String idProduit) {
+        String idStock = produitService.getIdStockByIdProduit(idProduit);
+        return ResponseEntity.ok(idStock);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProduitResponse> updateProduit(@PathVariable Long id, @RequestBody ProduitRequest produitRequest) {
+    public ResponseEntity<ProduitResponse> updateProduit(@PathVariable String id, @RequestBody ProduitRequest produitRequest) {
         ProduitResponse produitResponse = produitService.updateProduit(id, produitRequest);
         return ResponseEntity.ok(produitResponse);
     }
@@ -44,13 +53,13 @@ public class ProduitController {
     }
     @PutMapping("/{id}/add-quantity/{quantity}")
     public ResponseEntity<ProduitResponse> addQuantiteToProduit(
-            @PathVariable Long id, @PathVariable int quantity) {
+            @PathVariable String id, @PathVariable int quantity) {
         return ResponseEntity.ok(produitService.addQuantiteToProduit(id, quantity));
     }
 
     @PutMapping("/{id}/decrease-quantity/{quantity}")
     public ResponseEntity<ProduitResponse> decreaseQuantiteToProduit(
-            @PathVariable Long id, @PathVariable int quantity) {
+            @PathVariable String id, @PathVariable int quantity) {
         return ResponseEntity.ok(produitService.decreaseQuantiteToProduit(id, quantity));
     }
 

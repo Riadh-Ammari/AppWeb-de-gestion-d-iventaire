@@ -17,9 +17,11 @@ import java.util.Date;
 public class Produit {
 
     @Id
-    @Field("_id")
+
     public String idProduit;
     private String nom;
+    private String photoUrl;
+
     private Double prixUnitaire;
     private Integer seuilCritique;
     private Date dateAjout;

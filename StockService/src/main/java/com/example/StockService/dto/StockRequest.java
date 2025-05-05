@@ -13,7 +13,7 @@ import java.util.Map;
 @Setter
 
 public class StockRequest {
-    public String idStock;
+
     private Integer capacite;
     private Integer quantiteTotalStocke;
     private String adresse;

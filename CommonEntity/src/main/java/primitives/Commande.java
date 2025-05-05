@@ -1,13 +1,16 @@
-package com.example.ServiceCommande.model;
+package primitives;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
-@Document(collection = "commandes")
+@Document(collection = "Commandes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,8 +20,8 @@ public class Commande {
     private String idCommande;
     private Date dateCommande;
     private Double montantTotal;
-    private String destination;
+    private String idClient;
     private String etat; // (en cours, livrée, annulée)
-    private List<String> produits;//ids des produits
-    private String fournisseur;
+    private Map<String,Integer> produits;//ids des produits
+    private String idFournisseur;
 }

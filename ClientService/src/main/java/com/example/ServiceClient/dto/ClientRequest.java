@@ -15,8 +15,8 @@ public class ClientRequest {
     private String nom;
     private String contact;
     private String adresse;
-    private List<String> commandes;
-    private Map<String, Integer> produitsAdditionnelsAchetes;
+    private List<String> idCommandes;
+    private String idStock;
 
     // Constructeurs, getters et setters
 }

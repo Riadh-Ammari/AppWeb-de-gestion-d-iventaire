@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class Stock {
     @Id
-    @Field("_id")
+
     public String idStock;
     private Integer capacite;
     private Integer quantiteTotalStocke;
